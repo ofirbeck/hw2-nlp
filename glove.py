@@ -5,12 +5,11 @@ import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
 from sklearn.decomposition import PCA
 from collections import defaultdict
+from sklearn.manifold import TSNE
 
 # Ensure nltk dependencies are downloaded
 nltk.download("punkt")
 
-
-# Step 1: Preprocess the text data
 def preprocess_text(text):
 
     # Clean and tokenize the text
@@ -23,7 +22,6 @@ def preprocess_text(text):
     return tokenized_sentences
 
 
-# Step 2: Train GloVe model (using Gensim's Word2Vec as a proxy for GloVe model)
 class GloVe:
     def __init__(self, corpus, vector_size, window, min_count, learning_rate, epochs):
         self.corpus = corpus
@@ -79,8 +77,6 @@ class GloVe:
     def get_word_vector(self, word):
         return self.word_vectors[self.word_to_index[word]]
 
-
-# Step 4: PCA Visualization
 def visualize_embeddings_with_pca(model, words):
     word_vectors = [model.get_word_vector(word) for word in words]
 
